@@ -1,0 +1,21 @@
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: inherit;
+    max-width: 30rem;
+}
+
+.children {
+    margin-bottom: 4rem;
+}
+
+.container {
+    margin: auto;
+    width: 99vw;
+    align-items: center;
+}
+
+.contentContainer {
+    margin: auto;
+    max-width: 30rem;
+}

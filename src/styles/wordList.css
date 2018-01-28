@@ -1,0 +1,11 @@
+.wordList {
+    padding-top: 0.4rem;
+}
+
+.noWordsText {
+    display: flex;
+    display: -webkit-flex;
+    margin: auto;
+    padding: 1rem;
+    justify-content: center;
+}
