@@ -6,8 +6,8 @@
 # testing
 /coverage
 
-# production
-/build
+# production, commenting now to check on heroku
+#/build
 
 # misc
 .DS_Store
