@@ -86,22 +86,9 @@ export default class Home extends React.Component {
                             autoFocus
                         />
                     </div>
-                    {/* <TextField
-                        hintText="Enter search term"
-                        value={this.state.searchText}
-                        onChange={this.changeSearchText.bind(this)}
-                        fullWidth={true}
-                        autoFocus
-                    /> */}
                     <div style={{ color: "red" }}>
                         {this.state.error}
                     </div>
-                    {/* <RaisedButton
-                        label={this.state.searchButtonText}
-                        fullWidth={true}
-                        onClick={this.searchSubmit.bind(this)}
-                        disabled={this.state.searchDisabled}
-                    /> */}
                 </form>
                 <div className="wordCard">
                     {

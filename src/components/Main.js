@@ -40,14 +40,14 @@ export default class Main extends React.Component {
                 })
                 if (unAuthPaths.includes(history.location.pathname)) {
                     history.push("/home");
-                    history.go();
+                    // history.go();
                 }
             })
             .catch((err) => {
                 // console.log("Please login first");
                 if (paths.includes(history.location.pathname)) {
                     history.push("/");
-                    history.go();
+                    // history.go();
                 }
             })
         this.setState({
@@ -58,7 +58,9 @@ export default class Main extends React.Component {
     select(index) {
         console.log("Pushing at: ", index, this.state.selectedIndex);
         history.push(index);
-        history.go();
+        this.setState({
+            selectedIndex: paths.indexOf(history.location.pathname)
+        });
     }
 
     renderChildren() {
