@@ -12,6 +12,7 @@ export default class WordList extends React.Component {
         super(props);
         this.state = {
             wordList: this.props.result,
+            loading: true,
             wordResult: []
         }
         this.fetchWord = fetchWord;
@@ -20,7 +21,8 @@ export default class WordList extends React.Component {
     componentWillReceiveProps(newProps) {
         if (JSON.stringify(newProps) !== JSON.stringify(this.props)) {
             this.setState({
-                wordList: newProps.result
+                wordList: newProps.result,
+                loading: newProps.loading,
             })
         }
     }
@@ -67,7 +69,7 @@ export default class WordList extends React.Component {
             return (
                 <div className="noWordsText">
                     <Paper style={{ textAlign: 'center', display: 'inline-block' }} zDepth={1} >
-                        No Words found :(
+                        {this.state.loading ? "Loading..." : "No Words found :("}
                     </Paper>
                 </div>
             )

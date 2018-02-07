@@ -56,7 +56,7 @@ export default class Main extends React.Component {
     }
 
     select(index) {
-        console.log("Pushing at: ", index, this.state.selectedIndex);
+        // console.log("Pushing at: ", index, this.state.selectedIndex);
         history.push(index);
         this.setState({
             selectedIndex: paths.indexOf(history.location.pathname)

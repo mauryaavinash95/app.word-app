@@ -1,9 +1,18 @@
 .wordCard {
     padding-top: 0.7rem;
     margin: auto;
-    text-align: center;
 }
 
 .homeContainer{
     padding: 0.3rem;
+}
+
+.searchButton {
+    position: absolute;
+    right: 0px;
+    top: 12px;
+    width: 23px;
+    height: 23px;
+    border: 0.1px solid black;
+    border-radius: 2px;
 }

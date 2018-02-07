@@ -6,7 +6,8 @@ export default class Recent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recentResult: []
+            recentResult: [],
+            loading: true,
         }
         this.fetchRecent = fetchRecent;
     }
@@ -15,7 +16,8 @@ export default class Recent extends React.Component {
         this.fetchRecent()
             .then((results) => {
                 this.setState({
-                    recentResult: results.message
+                    recentResult: results.message,
+                    loading: false,
                 })
             })
             .catch((err) => {
@@ -26,7 +28,7 @@ export default class Recent extends React.Component {
     render() {
         return (
             <div>
-                <WordList result={this.state.recentResult} key="wordListKey" />
+                <WordList loading={this.state.loading} result={this.state.recentResult} key="wordListKey" />
             </div>
         )
     }

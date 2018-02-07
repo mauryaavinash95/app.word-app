@@ -8,7 +8,8 @@ export default class Saved extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            savedResult: []
+            savedResult: [],
+            loading: true
         }
         // console.log("In saved.js: ", this.props.userId);
     }
@@ -36,11 +37,13 @@ export default class Saved extends React.Component {
                         // console.log("Got response as : ", responseJson);
                         if (responseJson.code === 200) {
                             this.setState({
-                                savedResult: responseJson.message
+                                savedResult: responseJson.message,
+                                loading: false
                             });
                         } else {
                             this.setState({
-                                savedResult: []
+                                savedResult: [],
+                                loading: false
                             })
                         }
                     })
@@ -54,7 +57,7 @@ export default class Saved extends React.Component {
     render() {
         return (
             <div>
-                <WordList result={this.state.savedResult} key="wordListKeySaved" />
+                <WordList loading={this.state.loading} result={this.state.savedResult} key="wordListKeySaved" />
             </div>
         )
     }

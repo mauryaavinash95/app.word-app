@@ -41,14 +41,16 @@ export default class Home extends React.Component {
     }
 
     searchSubmit(e) {
-        e.preventDefault();
+        console.log("Submit clicked");
+        if (e)
+            e.preventDefault();
         if (this.state.searchText) {
             if (this.state.searchDisabled === false) {
                 this.setState({
                     searchDisabled: true,
                     searchButtonText: "Searching..."
                 })
-                this.fetchWord(this.state.searchText, 1)
+                this.fetchWord(this.state.searchText.toLowerCase(), 1)
                     .then((response) => {
                         this.setState({
                             searchResult: response,
@@ -75,16 +77,18 @@ export default class Home extends React.Component {
             <div className="homeContainer">
                 <form onSubmit={this.searchSubmit.bind(this)}>
                     <div style={{ position: 'relative', width: '100%', display: 'inline-block' }}>
-                        <div onClick={this.searchSubmit.bind(this)} style={{ position: 'absolute', right: 0, top: 12, width: 20, height: 20 }}>
+                        <div onClick={() => { this.searchSubmit(); }} className="searchButton">
                             <SearchIcon />
                         </div>
-                        <TextField
-                            hintText="Enter search term"
-                            value={this.state.searchText}
-                            onChange={this.changeSearchText.bind(this)}
-                            fullWidth={true}
-                            autoFocus
-                        />
+                        <div>
+                            <TextField
+                                hintText="Enter search term"
+                                value={this.state.searchText}
+                                onChange={this.changeSearchText.bind(this)}
+                                style={{ width: "94%" }}
+                                autoFocus
+                            />
+                        </div>
                     </div>
                     <div style={{ color: "red" }}>
                         {this.state.error}
@@ -96,13 +100,15 @@ export default class Home extends React.Component {
                             <WordCard result={this.state.searchResult} />
                             :
                             this.state.searchDisabled ?
-                                <RefreshIndicator
-                                    size={40}
-                                    left={10}
-                                    top={0}
-                                    status="loading"
-                                    style={{ display: 'inline-block', position: 'relative' }}
-                                />
+                                <div style={{ textAlign: "center" }}>
+                                    <RefreshIndicator
+                                        size={40}
+                                        left={10}
+                                        top={0}
+                                        status="loading"
+                                        style={{ display: 'inline-block', position: 'relative' }}
+                                    />
+                                </div>
                                 :
                                 undefined
                     }

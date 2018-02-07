@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Definitions from './Definitions';
+// import FlatButton from 'material-ui/FlatButton';
+import LexicalEntries from './LexicalEntries';
 import Favorites from 'material-ui/svg-icons/action/favorite';
 import NonFavorites from 'material-ui/svg-icons/action/favorite-border';
 import '../styles/wordCard.css';
@@ -65,9 +65,7 @@ export default class WordCard extends React.Component {
 
                     <CardText>
                         <div>
-                            <ol>
-                                <Definitions result={this.state.result.message} />
-                            </ol>
+                            <LexicalEntries results={this.state.result.message} />
                         </div>
                     </CardText>
                 </Card>
