@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
+import AutoComplete from 'material-ui/AutoComplete';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
@@ -7,6 +8,7 @@ import Header from './Header';
 import WordCard from './WordCard';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import { fetchWord } from '../functions/fetchWord';
+import { fetchSuggestions } from '../functions/fetchSuggestions';
 import '../styles/home.css';
 
 export default class Home extends React.Component {
@@ -17,7 +19,8 @@ export default class Home extends React.Component {
             searchResult: null,
             searchDisabled: false,
             searchButtonText: "Search",
-            error: ""
+            error: "",
+            dataSource: []
         }
         this.fetchWord = fetchWord;
     }
@@ -41,9 +44,9 @@ export default class Home extends React.Component {
     }
 
     searchSubmit(e) {
-        console.log("Submit clicked");
-        if (e)
+        if (e && e.preventDefault) {
             e.preventDefault();
+        }
         if (this.state.searchText) {
             if (this.state.searchDisabled === false) {
                 this.setState({
@@ -72,6 +75,27 @@ export default class Home extends React.Component {
         }
     }
 
+    handleUpdateInput = (value) => {
+        this.setState({
+            searchText: value
+        })
+        if (value.length >= 3) {
+            fetchSuggestions(value)
+                .then((response) => {
+                    this.setState({
+                        dataSource: response,
+                    });
+                })
+                .catch((err) => {
+                    this.setState({
+                        dataSource: [],
+                    });
+                })
+        }
+    };
+
+
+
     render() {
         return (
             <div className="homeContainer">
@@ -81,13 +105,24 @@ export default class Home extends React.Component {
                             <SearchIcon />
                         </div>
                         <div>
-                            <TextField
+                            <div style={{ width: "94%" }}>
+                                <AutoComplete
+                                    hintText="Enter search term"
+                                    dataSource={this.state.dataSource}
+                                    onUpdateInput={this.handleUpdateInput}
+                                    fullWidth={true}
+                                    value={this.state.searchText}
+                                    onNewRequest={this.searchSubmit.bind(this)}
+                                />
+                            </div>
+                            {/* <TextField
                                 hintText="Enter search term"
                                 value={this.state.searchText}
                                 onChange={this.changeSearchText.bind(this)}
                                 style={{ width: "94%" }}
                                 autoFocus
-                            />
+                                disabled={this.state.searchDisabled}
+                            /> */}
                         </div>
                     </div>
                     <div style={{ color: "red" }}>
