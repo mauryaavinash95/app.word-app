@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import AutoComplete from 'material-ui/AutoComplete';
+import Autosuggest from 'react-autosuggest';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
@@ -80,13 +81,16 @@ export default class Home extends React.Component {
             searchText: value
         })
         if (value.length >= 3) {
+            console.log("More than 3 chars");
             fetchSuggestions(value)
                 .then((response) => {
+                    console.log("Response is: ", response);
                     this.setState({
                         dataSource: response,
                     });
                 })
                 .catch((err) => {
+                    console.log("Error is: ", err);
                     this.setState({
                         dataSource: [],
                     });

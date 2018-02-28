@@ -2,11 +2,10 @@ import { backendUrl } from '../config/config';
 import { getCredentials } from './credentials';
 import localforage from 'localforage';
 
-export function fetchCacheRecent() {
+export function fetchCacheFavorites() {
     return new Promise((resolve, reject) => {
-        localforage.getItem('recent')
+        localforage.getItem('favorites')
             .then((result) => {
-                console.log("Resolved from cache");
                 resolve(result);
             })
             .catch((err) => {
@@ -15,16 +14,13 @@ export function fetchCacheRecent() {
             })
     });
 }
-
-export function fetchRecent() {
+export function fetchFavorites() {
     return new Promise((resolve, reject) => {
         getCredentials()
-            .then((credentials) => {
-                let route = backendUrl + "history";
-                let body = {
-                    userId: credentials.userId,
-                    token: credentials.token,
-                }
+            .then(credentials => {
+                // console.log("GetCredentials: ", credentials);
+                let route = backendUrl + "favorites";
+                let body = credentials
                 let options = {
                     method: "POST",
                     body: JSON.stringify(body),
@@ -35,23 +31,18 @@ export function fetchRecent() {
                 fetch(route, options)
                     .then((result) => result.json())
                     .then((responseJson) => {
+                        // console.log("Got response as : ", responseJson);
                         if (responseJson.code === 200) {
-                            localforage.setItem('recent', responseJson);
-                            resolve(responseJson);
+                            localforage.setItem('favorites', responseJson);
+                            resolve(responseJson)
                         } else {
-                            reject(responseJson);
+                            reject();
                         }
                     })
                     .catch((err) => {
                         console.log("Error: ", err);
-                        reject(err);
                     })
             })
-            .catch((err) => {
-                reject("Please login and try again");
-            })
 
-    })
+    });
 }
-
-

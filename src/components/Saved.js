@@ -2,6 +2,7 @@ import React from 'react';
 import { backendUrl } from '../config/config';
 import WordList from './WordList';
 import { getCredentials } from '../functions/credentials';
+import { fetchFavorites, fetchCacheFavorites } from '../functions/fetchFavourites';
 
 
 export default class Saved extends React.Component {
@@ -11,48 +12,47 @@ export default class Saved extends React.Component {
             savedResult: [],
             loading: true
         }
-        // console.log("In saved.js: ", this.props.userId);
+        this.fetchFavorites = fetchFavorites;
+        this.fetchCacheFavorites = fetchCacheFavorites;
     }
 
     componentWillMount() {
-        this.fetchFavorites();
-    }
-
-    fetchFavorites() {
-        getCredentials()
-            .then(credentials => {
-                // console.log("GetCredentials: ", credentials);
-                let route = backendUrl + "favorites";
-                let body = credentials
-                let options = {
-                    method: "POST",
-                    body: JSON.stringify(body),
-                    headers: new Headers({
-                        'Content-Type': 'application/json'
-                    }),
+        let networkRes = false
+        this.fetchCacheFavorites()
+            .then((result) => {
+                console.log("Showing favorites from cache now");
+                if (networkRes === false) {
+                    console.log("Showed favorites from cache ");
+                    this.setState({
+                        savedResult: result.message,
+                        loading: false
+                    });
                 }
-                fetch(route, options)
-                    .then((result) => result.json())
-                    .then((responseJson) => {
-                        // console.log("Got response as : ", responseJson);
-                        if (responseJson.code === 200) {
-                            this.setState({
-                                savedResult: responseJson.message,
-                                loading: false
-                            });
-                        } else {
-                            this.setState({
-                                savedResult: [],
-                                loading: false
-                            })
-                        }
-                    })
-                    .catch((err) => {
-                        console.log("Error: ", err);
-                    })
+            })
+            .catch((err) => {
+                this.setState({
+                    savedResult: [],
+                    loading: false
+                })
             })
 
+        this.fetchFavorites()
+            .then((result) => {
+                this.setState({
+                    savedResult: result.message,
+                    loading: false
+                });
+            })
+            .catch((err) => {
+                console.log("Error while fetching favourites: ", err);
+                this.setState({
+                    savedResult: [],
+                    loading: false
+                })
+            })
     }
+
+
 
     render() {
         return (

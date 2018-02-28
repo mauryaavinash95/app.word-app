@@ -20,9 +20,8 @@ export function fetchWord(word, flag = 1) {
                     }),
                 }
                 fetch(route, options)
-                    .then((result) => result.json())
+                    .then((response) => response.json())
                     .then((responseJson) => {
-                        // console.log("Got response as : ", responseJson);
                         resolve(responseJson);
                     })
                     .catch((err) => {
