@@ -20,9 +20,9 @@ export default class Saved extends React.Component {
         let networkRes = false
         this.fetchCacheFavorites()
             .then((result) => {
-                console.log("Showing favorites from cache now");
+                // console.log("Showing favorites from cache now");
                 if (networkRes === false) {
-                    console.log("Showed favorites from cache ");
+                    // console.log("Showed favorites from cache ");
                     this.setState({
                         savedResult: result.message,
                         loading: false

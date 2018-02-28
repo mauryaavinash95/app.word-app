@@ -81,10 +81,10 @@ export default class Home extends React.Component {
             searchText: value
         })
         if (value.length >= 3) {
-            console.log("More than 3 chars");
+            // console.log("More than 3 chars");
             fetchSuggestions(value)
                 .then((response) => {
-                    console.log("Response is: ", response);
+                    // console.log("Response is: ", response);
                     this.setState({
                         dataSource: response,
                     });

@@ -18,9 +18,9 @@ export default class Recent extends React.Component {
         let networkRes = false;
         this.fetchCacheRecent()
             .then((results) => {
-                console.log("Showing from cache");
+                // console.log("Showing from cache");
                 if (networkRes === false && results && results.message && results.message.length > 0) {
-                    console.log("Showed from cache");
+                    // console.log("Showed from cache");
                     this.setState({
                         recentResult: results.message,
                         loading: false,
@@ -33,7 +33,7 @@ export default class Recent extends React.Component {
         this.fetchRecent()
             .then((results) => {
                 networkRes = true;
-                console.log("Showing from network now");
+                // console.log("Showing from network now");
                 this.setState({
                     recentResult: results.message,
                     loading: false,

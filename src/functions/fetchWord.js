@@ -20,8 +20,12 @@ export function fetchWord(word, flag = 1) {
                     }),
                 }
                 fetch(route, options)
-                    .then((response) => response.json())
+                    .then((response) => {
+                        // console.log("[Fetch Word] Response is: ", response.clone());
+                        return response.json()
+                    })
                     .then((responseJson) => {
+                        // console.log("[Fetch Word] ResponseJson is: ", responseJson);
                         resolve(responseJson);
                     })
                     .catch((err) => {

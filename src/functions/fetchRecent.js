@@ -6,7 +6,6 @@ export function fetchCacheRecent() {
     return new Promise((resolve, reject) => {
         localforage.getItem('recent')
             .then((result) => {
-                console.log("Resolved from cache");
                 resolve(result);
             })
             .catch((err) => {
