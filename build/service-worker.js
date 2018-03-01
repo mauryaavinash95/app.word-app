@@ -13,6 +13,12 @@ const STATIC_FILES = [
     "/favicon.ico",
 ]
 
+const DYNAMIC_FILES = [
+    "/home",
+    "/recent",
+    "/favorites"
+]
+
 self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open(CACHE_STATIC_NAME)
@@ -83,7 +89,13 @@ function find(clonedEvent) {
 }
 
 function cacheBackend() {
-    console.log("In cache Backend");
+    // event.waitUntil(
+    //     caches.open(CACHE_STATIC_NAME)
+    //         .then((cache) => {
+    //             console.log("[Service Worker] Caching Dynamic Recent, Home and Favorite APIS: " + CACHE_VERSION);
+    //             cache.addAll(DYNAMIC_FILES);
+    //         })
+    // )
 }
 
 
