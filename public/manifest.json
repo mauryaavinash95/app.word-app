@@ -1,15 +1,20 @@
 {
-  "short_name": "Word-App",
-  "name": "Word-App",
+  "name": "Word App",
+  "short_name": "Word App",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "/icons/app-icon.png",
+      "type": "image/png",
+      "sizes": "48x48 96x96 144x144 192x192 256x256 384x384 512x512"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/index.html",
+  "scope": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait-primary",
+  "background_color": "#fff",
+  "theme_color": "#3f51b5",
+  "description": "A simple Word App, implementing a lot of PWA.",
+  "dir": "ltr",
+  "lang": "en-US"
 }

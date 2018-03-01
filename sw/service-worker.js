@@ -8,9 +8,15 @@ const STATIC_FILES = [
     "/index.html",
     "/static/css/main.6de6320f.css",
     "/static/css/main.6de6320f.css.map",
-    "/statc/js/main.dc244493.js",
-    "/statc/js/main.dc244493.js.map",
+    "/statc/js/main.9057de1d.js",
+    "/statc/js/main.9057de1d.js.map",
     "/favicon.ico",
+]
+
+const DYNAMIC_FILES = [
+    "/home",
+    "/recent",
+    "/favorites"
 ]
 
 self.addEventListener('install', function (event) {
@@ -83,7 +89,13 @@ function find(clonedEvent) {
 }
 
 function cacheBackend() {
-    console.log("In cache Backend");
+    // event.waitUntil(
+    //     caches.open(CACHE_STATIC_NAME)
+    //         .then((cache) => {
+    //             console.log("[Service Worker] Caching Dynamic Recent, Home and Favorite APIS: " + CACHE_VERSION);
+    //             cache.addAll(DYNAMIC_FILES);
+    //         })
+    // )
 }
 
 
