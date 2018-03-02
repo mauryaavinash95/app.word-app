@@ -75,7 +75,7 @@ export default class Login extends React.Component {
                     this.setCredentials(resolve.message)
                         .then((res) => {
                             history.push("/home");
-                            history.go();
+                            // history.go();
                         })
                         .catch((err) => {
                             this.changeButtonStatus(0);
@@ -95,7 +95,7 @@ export default class Login extends React.Component {
 
     sendToSignUp() {
         history.push("/signup");
-        history.go();
+        // history.go();
     }
 
     render() {
