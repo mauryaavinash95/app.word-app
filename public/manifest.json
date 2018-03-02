@@ -3,9 +3,29 @@
   "short_name": "Word App",
   "icons": [
     {
-      "src": "/icons/app-icon.png",
+      "src": "/icons/app-logo-144x144.png",
       "type": "image/png",
-      "sizes": "48x48 96x96 144x144 192x192 256x256 384x384 512x512"
+      "sizes": "144x144"
+    },
+    {
+      "src": "/icons/app-logo-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/app-logo-256x256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/icons/app-logo-384x384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "/icons/app-logo-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": "/index.html",
@@ -14,7 +34,7 @@
   "orientation": "portrait-primary",
   "background_color": "#fff",
   "theme_color": "#3f51b5",
-  "description": "A simple Word App, implementing a lot of PWA.",
+  "description": "A simple Word App, implemented using PWA.",
   "dir": "ltr",
   "lang": "en-US"
 }

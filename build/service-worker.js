@@ -10,6 +10,7 @@ const STATIC_FILES = [
     "/static/css/main.6de6320f.css.map",
     "/statc/js/main.8d71f33b.js",
     "/statc/js/main.8d71f33b.js.map",
+    "/static/js/localforage.js",
     "/favicon.ico",
 ]
 
