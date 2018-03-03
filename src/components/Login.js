@@ -23,7 +23,7 @@ export default class Login extends React.Component {
 
     changeUsername(e) {
         this.setState({
-            username: e.target.value
+            username: e.target.value.toString().toLowerCase()
         })
     }
 
