@@ -50,7 +50,6 @@ export default class Home extends React.Component {
             e.preventDefault();
         }
         if (this.state.searchText) {
-            notification();
             if (this.state.searchDisabled === false) {
                 this.setState({
                     searchDisabled: true,
@@ -63,6 +62,8 @@ export default class Home extends React.Component {
                             searchDisabled: false,
                             searchButtonText: "Search"
                         });
+                        // console.log("Calling notification function in Home.js");
+                        notification();
                     })
                     .catch((err) => {
                         console.log("Got error in Home.js: ", err);

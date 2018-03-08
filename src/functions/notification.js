@@ -44,7 +44,6 @@ function configurePushSub() {
             return sendNewSubscription(newsubscription);
         })
         .then((res) => {
-            console.log("Res is: ", res);
             if (res && res.ok) {
                 displayNotification()
             }
@@ -125,7 +124,6 @@ function sendNewSubscription(newsubscription) {
                             "Accept": "application/json",
                         }),
                     };
-                    console.log("Sending request as: ", options);
                     return fetch(route, options)
                 })
                 .then((response) => {
