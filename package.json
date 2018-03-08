@@ -22,7 +22,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/styles/scss -o src/styles/css --watch --recursive",
     "sass": "sass --watch src/styles/scss:src/styles/css",
     "start": "react-scripts start",
-    "build": "cp build/service-worker.js sw/ && react-scripts build && cp build/index.html build/404.html && cp sw/service-worker.js build/ && cp public/localforage.js build/static/js",
+    "build": "cp build/service-worker.js sw/ && react-scripts build && cp build/index.html build/404.html && cp sw/service-worker.js build/ && cp public/js/localforage.js build/static/js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"

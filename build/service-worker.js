@@ -8,8 +8,8 @@ const STATIC_FILES = [
     "/index.html",
     "/static/css/main.6de6320f.css",
     "/static/css/main.6de6320f.css.map",
-    "/statc/js/main.aacbb920.js",
-    "/statc/js/main.aacbb920.js.map",
+    "/statc/js/main.ae127c0a.js",
+    "/statc/js/main.ae127c0a.js.map",
     "/static/js/localforage.js",
     "/favicon.ico",
 ]
@@ -37,6 +37,8 @@ self.addEventListener('fetch', function (event) {
         )
     } else if (event.request.url.indexOf("/find") > -1) {
         event.respondWith(find(event));
+    } else if (event.request.url.indexOf('/service-worker.js') > -1) {
+        event.respondWith(fetch(event.request));
     } else {
         event.respondWith(
             caches.match(event.request)
@@ -56,7 +58,7 @@ self.addEventListener('fetch', function (event) {
                                 console.log("In error: ", err);
                                 return caches.open(CACHE_STATIC_NAME)
                                     .then((cache) => {
-                                        return cache.match("/offline.html");
+                                        return cache.match("/404.html");
                                     })
                             })
                     }
@@ -67,7 +69,6 @@ self.addEventListener('fetch', function (event) {
 
 
 function find(clonedEvent) {
-    cacheBackend();
     let c = clonedEvent.request.clone();
     return new Promise((resolve, reject) => {
         c.json().then((requestBody) => {
@@ -89,15 +90,6 @@ function find(clonedEvent) {
     })
 }
 
-function cacheBackend() {
-    // event.waitUntil(
-    //     caches.open(CACHE_STATIC_NAME)
-    //         .then((cache) => {
-    //             console.log("[Service Worker] Caching Dynamic Recent, Home and Favorite APIS: " + CACHE_VERSION);
-    //             cache.addAll(DYNAMIC_FILES);
-    //         })
-    // )
-}
 
 
 function isInArray(str, arr) {
@@ -107,3 +99,73 @@ function isInArray(str, arr) {
         }
     } return false;
 }
+
+
+self.addEventListener('notificationclick', function (event) {
+    var notification = event.notification;
+    var action = event.action;
+    console.log(notification);
+    if (action === 'confirm') {
+        event.waitUntil(
+            clients.matchAll()
+                .then(function (clis) {
+                    var client = clis.find(function (c) {
+                        return c.visibilityState === 'visible';
+                    });
+
+                    if (client !== undefined) {
+                        // client.navigate(notification.data.url);
+                        client.focus();
+                    } else {
+                        clients.openWindow(notification.data.url);
+                    }
+                    notification.close();
+                })
+        );
+    } else {
+        console.log(action);
+        notification.close();
+    }
+});
+
+self.addEventListener('notificationclose', function (event) {
+    console.log('Notification was closed', event);
+});
+
+self.addEventListener('push', function (event) {
+    console.log('Push Notification received', event);
+    var data = { title: "Word-App", content: 'Meaning found', openUrl: "/" };
+    if (event.data) {
+        data = JSON.parse(event.data.text());
+    }
+
+    let options = {
+        body: data.content,
+        icon: '/icons/app-logo-128x128.png',
+        dir: "rtl",
+        lang: 'en-US',
+        vibrate: [100, 50, 200],
+        badge: '/icons/app-logo-128x128.png',
+        tag: data.title,
+        renotify: true,
+        actions: [
+            {
+                action: 'confirm',
+                title: 'Got it',
+                icon: '/icons/app-logo-128x128.png'
+            },
+            {
+                action: 'cancel',
+                title: 'Cancel',
+                icon: '/icons/app-logo-128x128.png'
+            }
+        ],
+        data: {
+            url: data.openUrl
+        }
+    }
+
+    event.waitUntil(
+        self.registration.showNotification(data.title, options)
+    );
+});

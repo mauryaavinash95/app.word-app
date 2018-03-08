@@ -11,6 +11,7 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import { fetchWord } from '../functions/fetchWord';
 import { fetchSuggestions } from '../functions/fetchSuggestions';
 import '../styles/home.css';
+import { notification } from '../functions/notification';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -49,6 +50,7 @@ export default class Home extends React.Component {
             e.preventDefault();
         }
         if (this.state.searchText) {
+            notification();
             if (this.state.searchDisabled === false) {
                 this.setState({
                     searchDisabled: true,
