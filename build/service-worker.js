@@ -8,8 +8,8 @@ const STATIC_FILES = [
     "/index.html",
     "/static/css/main.6de6320f.css",
     "/static/css/main.6de6320f.css.map",
-    "/statc/js/main.af1c505c.js",
-    "/statc/js/main.af1c505c.js.map",
+    "/statc/js/main.f8fa458e.js",
+    "/statc/js/main.f8fa458e.js.map",
     "/static/js/localforage.js",
     "/favicon.ico",
 ]
